@@ -12,6 +12,7 @@ def print_count(n):
 
 imap_server = imaplib.IMAP4_SSL("imap.gmail.com",993)
 try:
+    # The password is application-specific. if it leaks it gets deactivated.
     imap_server.login("felzix", "oslomrahgducvlmc")
 except :
     try:
