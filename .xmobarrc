@@ -1,0 +1,20 @@
+Config { font = "-misc-fixed-*-*-*-*-10-*-*-*-*-*-*-*"
+       , borderColor = "black"
+       , border = TopB
+       , bgColor = "black"
+       , fgColor = "grey"
+       , position = Top
+       , lowerOnStart = False
+       , commands = [ Run Weather "KOAK" ["-t","<tempC>C","-L","18","-H","25","--normal","green","--high","red","--low","lightblue"] 36000
+                    , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Swap [] 10
+    		    , Run Date "%H:%M:%S %a %b %_d %Y" "date" 10
+                    , Run Com "$HOME/.xmonad/bin/volume.sh" [] "volume" 10
+                    , Run Com "$HOME/.xmonad/bin/unread.sh" [] "unread" 100
+                    , Run StdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = " %cpu% | %memory% | %swap% } <fc=#ee9a00>%date%</fc> { Unread Email: %unread% | Volume: %volume% | %KOAK% |  "
+       }
