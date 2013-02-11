@@ -14,7 +14,7 @@
 --
 -- http://www.haskell.org/haskellwiki/Xmonad/Notable_changes_since_0.8
 --
- 
+
 import Data.Monoid
 import Data.Tuple
 import qualified Data.Map        as M
@@ -37,11 +37,11 @@ import XMonad.Layout.NoBorders
 import XMonad.Actions.TopicSpace
 import XMonad.Prompt
 import XMonad.Prompt.Workspace
- 
+
 host = fmap nodeName getSystemID
 
 myTerminal = "gnome-terminal" --probably must name this myTerminal
-myBrowser = "firefox"
+myBrowser = "google-chrome"
 --myBrowser = case host of
   --"robert-davidson" -> "firefox"
   --"chike"           -> "google-chrome"
@@ -52,15 +52,16 @@ javaOracle = "export PATH=/usr/lib/jvm/java-7-oracle/jre/bin/java/:$PATH;"
 javaOpen   = "export PATH=/usr/lib/jvm/java-7-openjdk-amd64/bin/:$PATH;"
 pyCharm    = javaOracle ++ "~/pycharm-2.6.3/bin/pycharm.sh"
 eclipse    = javaOpen ++ "eclipse"
- 
+leksah     = "leksah"
+
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
- 
+
 -- Width of the window border in pixels.
 --
 myBorderWidth   = 1
- 
+
 -- modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
 -- ("right alt"), which does not conflict with emacs keybindings. The
@@ -92,6 +93,7 @@ tiF (TI _ _ fn) = fn
 
 topics :: [TI]
 topics =
+  --   Main list
   [ TI "home"           xK_F1  $ return ()
   , TI "media"          xK_m   $ return () -- TODO bring up media list somehow
   , TI "talk"           xK_t   $ spawn "pidgin"
@@ -101,9 +103,12 @@ topics =
   , TI "gaming"         xK_g   $ return () -- TODO bring up game list somehow
   , TI "eclipse1"       xK_1   $ spawn eclipse
   , TI "pycharm3"       xK_3   $ spawn pyCharm
+  , TI "leksah5"        xK_5   $ spawn leksah
   , TI "documentation"  xK_d   $ spawn myBrowser
-  , TI "pycharm4"       xK_4   $ spawn pyCharm
+  --   Secondary list
   , TI "eclipse2"       xK_2   $ spawn eclipse
+  , TI "pycharm4"       xK_4   $ spawn pyCharm
+  , TI "leksah6"        xK_6   $ spawn leksah
   , TI "misc2"          xK_F2  $ return ()
   , TI "misc3"          xK_F3  $ return ()
   , TI "misc4"          xK_F4  $ return ()
@@ -157,8 +162,8 @@ calculator        = 0x1008FF1D
 -- Key bindings. Add, modify or remove key bindings here.
 --
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
- 
-    [ 
+
+    [
     -- Media
       ((noModMask, audioLowerVolume), lowerVolume 4 >> return ())
     , ((noModMask, audioRaiseVolume), raiseVolume 4 >> return ())
@@ -266,7 +271,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
 ------------------------------------------------------------------------
 -- Layouts:
- 
+
 -- You can specify and transform your layouts by modifying these values.
 -- If you change layout bindings be sure to use 'mod-shift-space' after
 -- restarting (with 'mod-q') to reset your layout state to the new
@@ -295,7 +300,7 @@ singletonLayout = avoidStruts $ noBorders $ Full
 
 ------------------------------------------------------------------------
 -- Window rules:
- 
+
 -- Execute arbitrary actions and WindowSet manipulations when managing
 -- a new window. You can use this to, for example, always float a
 -- particular program, or have a client always appear on a particular
@@ -332,18 +337,18 @@ myEventHook = mempty
 
 ------------------------------------------------------------------------
 -- Status bars and logging
- 
+
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 myLogHook = return ()
 
 ------------------------------------------------------------------------
 -- Startup hook
- 
+
 -- Perform an arbitrary action each time xmonad starts or is restarted
 -- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
 -- per-workspace layout choices.
-myStartupHook = 
+myStartupHook =
   -- Fixes java display issue
   setWMName "LG3D"
 
