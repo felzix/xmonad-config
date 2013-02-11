@@ -34,6 +34,7 @@ import XMonad.Util.Run(spawnPipe)
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Tabbed
 import XMonad.Actions.TopicSpace
 import XMonad.Prompt
 import XMonad.Prompt.Workspace
@@ -176,23 +177,24 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Layout
     -- Rotate through the available layout algorithms
-    , ((modm,               xK_space ), sendMessage NextLayout)
+    , ((modm,                  xK_space   ), sendMessage NextLayout)
     --  Reset the layouts on the current workspace to default
-    , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
+    , ((modm .|. altMaskLeft,  xK_space   ), setLayout $ XMonad.layoutHook conf)
+    , ((modm .|. altMaskRight, xK_space   ), setLayout $ XMonad.layoutHook conf)
     -- Shrink the master area horizontally
-    , ((modm,               xK_Down  ), sendMessage Shrink)
+    , ((modm,                  xK_Down    ), sendMessage Shrink)
     -- Expand the master area horizontally
-    , ((modm,               xK_Up    ), sendMessage Expand)
+    , ((modm,                  xK_Up      ), sendMessage Expand)
     -- Shrink the master area vertically
-    , ((modm .|. shiftMask, xK_Down  ), sendMessage MirrorShrink)
+    , ((modm .|. shiftMask,    xK_Down    ), sendMessage MirrorShrink)
     -- Expand the master area vertically
-    , ((modm .|. shiftMask, xK_Up    ), sendMessage MirrorExpand)
+    , ((modm .|. shiftMask,    xK_Up      ), sendMessage MirrorExpand)
     -- Push window back into tiling
-    , ((modm .|. shiftMask, xK_grave ), withFocused $ windows . W.sink)
+    , ((modm .|. shiftMask,    xK_grave   ), withFocused $ windows . W.sink)
     -- Increment the number of windows in the master area
-    , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
+    , ((modm              ,    xK_comma   ), sendMessage (IncMasterN 1))
     -- Deincrement the number of windows in the master area
-    , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
+    , ((modm              ,    xK_period  ), sendMessage (IncMasterN (-1)))
 
     -- Window
     -- close focused window
@@ -223,8 +225,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Launch dmenu
     , ((modm,                  xK_grave ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
     -- Lock screen
-    , ((modm .|. altMaskLeft,  xK_space ), spawn "gnome-screensaver-command -l")
-    , ((modm .|. altMaskRight, xK_space ), spawn "gnome-screensaver-command -l")
+    , ((modm,                  xK_Escape), spawn "gnome-screensaver-command -l")
 
     ]
     ++
@@ -274,8 +275,11 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 --
 
 singletonWorkspaces = ["media", "gaming"]
+talkWorkspaces      = ["talk"]
 
-myLayout = onWorkspaces singletonWorkspaces singletonLayout $ regularLayouts
+myLayout = onWorkspaces singletonWorkspaces singletonLayout
+         $ onWorkspaces talkWorkspaces talkLayout
+         $ regularLayouts
 
 regularLayouts = avoidStruts $ tiled ||| Full
   where
@@ -291,7 +295,8 @@ regularLayouts = avoidStruts $ tiled ||| Full
     -- Percent of screen to increment by when resizing panes
     delta   = 3/100
 
-singletonLayout = avoidStruts $ noBorders $ Full
+singletonLayout = avoidStruts $ noBorders $ Full ||| simpleTabbed
+talkLayout      = avoidStruts $ noBorders $ simpleTabbed
 
 ------------------------------------------------------------------------
 -- Window rules:
