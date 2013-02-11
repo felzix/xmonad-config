@@ -41,14 +41,10 @@ import XMonad.Prompt.Workspace
 
 host = fmap nodeName getSystemID
 
-myTerminal = "gnome-terminal" --probably must name this myTerminal
-myBrowser = "firefox"
---myBrowser = case host of
-  --"robert-davidson" -> "firefox"
-  --"chike"           -> "google-chrome"
-  --_                 -> "google-chrome"
-myEmail    = "thunderbird"
 scriptBin  = "~/.xmonad/bin/"
+myTerminal = "gnome-terminal" --probably must name this myTerminal
+myBrowser = scriptBin ++ "browser.sh"
+myEmail    = "thunderbird"
 javaOracle = "export PATH=/usr/lib/jvm/java-7-oracle/jre/bin/java/:$PATH;"
 javaOpen   = "export PATH=/usr/lib/jvm/java-7-openjdk-amd64/bin/:$PATH;"
 pyCharm    = javaOracle ++ "~/pycharm-2.6.3/bin/pycharm.sh"
