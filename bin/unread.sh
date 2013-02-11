@@ -1,5 +1,11 @@
 #!/bin/bash
 
+host=`hostname`
+if [ "$host" -eq "robert-desktop" ]; then
+    ./unread.py
+    exit 0
+fi
+
 count=`$HOME/lib/mork-converter/src/mork $HOME/.thunderbird/pwj9fjh6.default/ImapMail/webmail.locationlabs.com/INBOX.msf|grep numNewMsgs|perl -pi -e "s/\D//gi"`
 
 if [ -z "$count" ]; then
