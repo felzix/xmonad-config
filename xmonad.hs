@@ -320,6 +320,7 @@ talkLayout      = avoidStruts $ noBorders $ simpleTabbed
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
+    , className =? "Pidgin"         --> doShift "talk"
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore
     , isFullscreen                  --> doFullFloat
