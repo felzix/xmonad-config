@@ -42,14 +42,16 @@ import XMonad.Prompt.Workspace
 host = fmap nodeName getSystemID
 
 scriptBin  = "~/.xmonad/bin/"
+myBrowser  = scriptBin ++ "browser.sh"
 myTerminal = "gnome-terminal" --probably must name this myTerminal
-myBrowser = scriptBin ++ "browser.sh"
 myEmail    = "thunderbird"
 javaOracle = "export PATH=/usr/lib/jvm/java-7-oracle/jre/bin/java/:$PATH;"
 javaOpen   = "export PATH=/usr/lib/jvm/java-7-openjdk-amd64/bin/:$PATH;"
 pyCharm    = javaOracle ++ "~/pycharm-2.6.3/bin/pycharm.sh"
 eclipse    = javaOpen ++ "eclipse"
 leksah     = "leksah"
+dmenuExec  = "exe=`dmenu_path | dmenu` && eval \"exec $exe\""
+dmenuWhite = "exe=`cat " ++ scriptBin ++ "dmenu_whitelist|dmenu` && eval \"exec $exe\""
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -226,8 +228,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Restart xmonad
     , ((modm .|. altMaskLeft,  xK_Return), spawn "xmonad --recompile; xmonad --restart")
     , ((modm .|. altMaskRight, xK_Return), spawn "xmonad --recompile; xmonad --restart")
-    -- Launch dmenu
-    , ((modm,                  xK_grave ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")
+    -- Launch dmenu w/ whitelist
+    , ((modm,                  xK_grave ), spawn dmenuWhite)
+    -- Launch dmenu w/o whitelist
+    , ((modm .|. altMaskLeft,  xK_grave ), spawn dmenuExec)
+    , ((modm .|. altMaskRight, xK_grave ), spawn dmenuExec)
     -- Lock screen
     , ((modm,                  xK_Escape), spawn "gnome-screensaver-command -l")
 
