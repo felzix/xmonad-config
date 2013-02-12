@@ -1,7 +1,7 @@
 #!/bin/bash
 
 host=`hostname`
-if [ "$host" -eq "robert-desktop" ]; then
+if [ "$host" != "robert-desktop" ]; then
     ./unread.py
     exit 0
 fi

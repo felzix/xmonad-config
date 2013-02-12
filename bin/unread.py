@@ -3,6 +3,7 @@
 import imaplib
 
 lastcountstore = "/tmp/lastcountstore"
+passwordFile = "password"
 
 def print_count(n):
     if int(n) == 0:
@@ -10,11 +11,19 @@ def print_count(n):
     else:
         print "<fc=red>" + str(n) + "</fc>"
 
+try:
+    f = open(passwordFile, 'r')
+    password = f.read().strip()
+    f.close()
+except:
+    print "<fc=red>no password</fc>"
+    exit(0) # exit w/ 0 just so xmobar won't bitch
+
 imap_server = imaplib.IMAP4_SSL("imap.gmail.com",993)
 try:
-    # The password is application-specific. if it leaks it gets deactivated.
-    imap_server.login("felzix", "oslomrahgducvlmc")
-except :
+    # The password is application-specific. If it leaks I deactivate it.
+    imap_server.login("felzix", password)
+except:
     try:
         f = open(lastcountstore, 'r')
         print_count(f.read())
@@ -22,7 +31,7 @@ except :
         exit(0)
     except IOError:
         print "<fc=red>unauthorized</fc>"
-        exit(0) # exit w/ 1 just so xmobar won't bitch
+        exit(0) # exit w/ 0 just so xmobar won't bitch
 
 imap_server.select('INBOX')
 
