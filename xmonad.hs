@@ -216,6 +216,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Goto workspace
     , ((modm,                  xK_KP_0        ), workspacePrompt defaultXPConfig (switchTopic myTopicConfig))
     , ((modm,                  xK_KP_Insert   ), workspacePrompt defaultXPConfig (switchTopic myTopicConfig))
+    -- Shift to workspace
+    , ((modm .|. shiftMask,    xK_KP_0        ), workspacePrompt defaultXPConfig $ windows . W.shift)
+    , ((modm .|. shiftMask,    xK_KP_Insert   ), workspacePrompt defaultXPConfig $ windows . W.shift)
 
     -- XMonad
     -- Quit xmonad
