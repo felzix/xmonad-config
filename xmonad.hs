@@ -25,7 +25,7 @@ import System.Posix.Unistd
 import XMonad
 import qualified XMonad.StackSet as W
 import XMonad.Actions.Volume
-import XMonad.Actions.CycleWS
+import XMonad.Actions.SpawnOn
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -95,19 +95,19 @@ topics =
   --   Main list
   [ TI "home"           xK_F1  $ return ()
   , TI "media"          xK_m   $ return () -- TODO bring up media list somehow
-  , TI "talk"           xK_t   $ spawn "pidgin"
-  , TI "email"          xK_e   $ spawn myEmail
-  , TI "journal"        xK_j   $ spawn "gedit ~/journal/`date +'%y-%m-%d'`"
-  , TI "internet"       xK_i   $ spawn myBrowser
+  , TI "talk"           xK_t   $ spawnHere "pidgin"
+  , TI "email"          xK_e   $ spawnHere myEmail
+  , TI "journal"        xK_j   $ spawnHere "gedit ~/journal/`date +'%y-%m-%d'`"
+  , TI "internet"       xK_i   $ spawnHere myBrowser
   , TI "gaming"         xK_g   $ return () -- TODO bring up game list somehow
-  , TI "eclipse1"       xK_1   $ spawn eclipse
-  , TI "pycharm3"       xK_3   $ spawn pyCharm
-  , TI "leksah5"        xK_5   $ spawn leksah
-  , TI "documentation"  xK_d   $ spawn myBrowser
+  , TI "eclipse1"       xK_1   $ spawnHere eclipse
+  , TI "pycharm3"       xK_3   $ spawnHere pyCharm
+  , TI "leksah5"        xK_5   $ spawnHere leksah
+  , TI "documentation"  xK_d   $ spawnHere myBrowser
   --   Secondary list
-  , TI "eclipse2"       xK_2   $ spawn eclipse
-  , TI "pycharm4"       xK_4   $ spawn pyCharm
-  , TI "leksah6"        xK_6   $ spawn leksah
+  , TI "eclipse2"       xK_2   $ spawnHere eclipse
+  , TI "pycharm4"       xK_4   $ spawnHere pyCharm
+  , TI "leksah6"        xK_6   $ spawnHere leksah
   , TI "misc2"          xK_F2  $ return ()
   , TI "misc3"          xK_F3  $ return ()
   , TI "misc4"          xK_F4  $ return ()
@@ -119,6 +119,7 @@ topics =
   , TI "misc10"         xK_F10 $ return ()
   , TI "misc11"         xK_F11 $ return ()
   , TI "misc12"         xK_F12 $ return ()
+  -- Put hot-added workspaces after here. Organize later.
   ]
 
 myTopics = map tiT topics
@@ -172,11 +173,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((noModMask, audioPlay       ), spawn $ scriptBin ++ "play.sh")
 
     -- Window launching
-    , ((noModMask,          calculator), spawn (myTerminal ++ " -e python"))
+    , ((noModMask,          calculator), spawnHere $ myTerminal ++ " -e python")
     -- terminal
-    , ((modm .|. shiftMask, xK_Return ), spawn $ XMonad.terminal conf)
+    , ((modm .|. shiftMask, xK_Return ), spawnHere $ XMonad.terminal conf)
     -- browser
-    , ((modm,               xK_KP_Subtract), spawn myBrowser)
+    , ((modm,               xK_KP_Subtract), spawnHere myBrowser)
 
     -- Layout
     -- Rotate through the available layout algorithms
@@ -390,7 +391,7 @@ defaults = do
 
         -- hooks, layouts
         , layoutHook         = myLayout
-        , manageHook         = myManageHook
+        , manageHook         = manageSpawn <+> myManageHook
         , handleEventHook    = myEventHook
         , logHook            = myLogHook
         , startupHook        = myStartupHook
