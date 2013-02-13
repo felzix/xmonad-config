@@ -327,6 +327,7 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , className =? "Pidgin"         --> doShift "talk"
+    , className =? "Mail"           --> doShift "email"
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore
     , isFullscreen                  --> doFullFloat
