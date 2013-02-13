@@ -305,7 +305,7 @@ regularLayouts = avoidStruts $ tiled ||| Full
     -- Percent of screen to increment by when resizing panes
     delta   = 3/100
 
-singletonLayout = avoidStruts $ noBorders $ Full ||| simpleTabbed
+singletonLayout = avoidStruts $ noBorders $ simpleTabbed ||| Full
 talkLayout      = avoidStruts $ noBorders $ simpleTabbed
 
 ------------------------------------------------------------------------
