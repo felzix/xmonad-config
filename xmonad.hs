@@ -21,7 +21,7 @@ import qualified Data.Map        as M
 import System.Exit
 import System.IO
 import System.Posix.Unistd
- 
+
 import XMonad
 import qualified XMonad.StackSet as W
 import XMonad.Actions.Volume
@@ -327,8 +327,8 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , className =? "Pidgin"         --> doShift "talk"
-    , className =? "pithos"         --> doShift "media"
-    , className =? "Mail"           --> doShift "email"
+    , className =? "Pithos"         --> doShift "media"
+    , className =? "Thunderbird"    --> doShift "email"
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore
     , isFullscreen                  --> doFullFloat
