@@ -178,6 +178,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_Return ), spawnHere $ XMonad.terminal conf)
     -- browser
     , ((modm,               xK_KP_Subtract), spawnHere myBrowser)
+    -- Launch dmenu w/ whitelist
+    , ((modm,                  xK_grave ), spawn dmenuWhite)
+    -- Launch dmenu w/o whitelist
+    , ((modm .|. altMaskLeft,  xK_grave ), spawn dmenuExec)
+    , ((modm .|. altMaskRight, xK_grave ), spawn dmenuExec)
 
     -- Layout
     -- Rotate through the available layout algorithms
@@ -229,11 +234,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Restart xmonad
     , ((modm .|. altMaskLeft,  xK_Return), spawn "xmonad --recompile; xmonad --restart")
     , ((modm .|. altMaskRight, xK_Return), spawn "xmonad --recompile; xmonad --restart")
-    -- Launch dmenu w/ whitelist
-    , ((modm,                  xK_grave ), spawn dmenuWhite)
-    -- Launch dmenu w/o whitelist
-    , ((modm .|. altMaskLeft,  xK_grave ), spawn dmenuExec)
-    , ((modm .|. altMaskRight, xK_grave ), spawn dmenuExec)
     -- Lock screen
     , ((modm,                  xK_Escape), spawn "gnome-screensaver-command -l")
 
