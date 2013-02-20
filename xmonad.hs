@@ -45,6 +45,7 @@ scriptBin  = "~/.xmonad/bin/"
 myBrowser  = scriptBin ++ "browser.sh"
 myTerminal = "gnome-terminal" --probably must name this myTerminal
 myEmail    = "thunderbird"
+myCalendar = scriptBin ++ "calendar.sh"
 javaOracle = "export PATH=/usr/lib/jvm/java-7-oracle/jre/bin/java/:$PATH;"
 javaOpen   = "export PATH=/usr/lib/jvm/java-7-openjdk-amd64/bin/:$PATH;"
 pyCharm    = javaOracle ++ "~/pycharm-2.6.3/bin/pycharm.sh"
@@ -97,6 +98,7 @@ topics =
   , TI "media"          xK_m   $ return () -- TODO bring up media list somehow
   , TI "talk"           xK_t   $ spawnHere "pidgin"
   , TI "email"          xK_e   $ spawnHere myEmail
+  , TI "calendar"       xK_c   $ spawnHere myCalendar
   , TI "journal"        xK_j   $ spawnHere "gedit ~/journal/`date +'%y-%m-%d'`"
   , TI "internet"       xK_i   $ spawnHere myBrowser
   , TI "gaming"         xK_g   $ return () -- TODO bring up game list somehow
