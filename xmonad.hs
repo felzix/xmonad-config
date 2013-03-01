@@ -30,6 +30,7 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.UrgencyHook
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.PerWorkspace
@@ -355,7 +356,7 @@ myEventHook = mempty
 
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
-myLogHook = return ()
+--myLogHook = return ()
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -374,12 +375,8 @@ myStartupHook =
 --
 main = do
     xmproc <- spawnPipe "xmobar"
-    xmonad =<< defaults
-
-defaults = do
     checkTopicConfig myTopics myTopicConfig
-    return $ defaultConfig
-        {
+    xmonad $ defaultConfig {
         -- simple stuff
           terminal           = myTerminal
         , focusFollowsMouse  = myFocusFollowsMouse
@@ -397,7 +394,7 @@ defaults = do
         , layoutHook         = myLayout
         , manageHook         = manageSpawn <+> myManageHook
         , handleEventHook    = myEventHook
-        , logHook            = myLogHook
+        , logHook            = dynamicLogWithPP $ xmobarPP { ppOutput = hPutStrLn xmproc }
         , startupHook        = myStartupHook
         }
 

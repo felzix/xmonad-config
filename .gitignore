@@ -10,4 +10,5 @@ xmonad-x86_64-linux
 xmonad.errors
 password
 work-calendar
+*.swp
 
