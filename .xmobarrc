@@ -5,11 +5,11 @@ Config { font = "-misc-fixed-*-*-*-*-10-*-*-*-*-*-*-*"
        , fgColor = "grey"
        , position = Top
        , lowerOnStart = False
-       , commands = [ Run Weather "KOAK" ["-t","<tempC>C","-L","18","-H","25","--normal","green","--high","red","--low","lightblue"] 36000
+       , commands = [ Run Weather "KOAK" ["-t","<tempC>C","-L","18","-H","25","--normal","green","--high","red","--low","lightblue","-p","2"] 36000
                     , Run Cpu ["-H","50","--high","red","-p","3"] 10
                     , Run Memory ["-t","Mem: <usedratio>%","-p","3"] 10
                     , Run Swap ["-p","3"] 10
-    		    , Run Date "%H:%M:%S %a %b %_d %Y" "date" 10
+                    , Run Date "%H:%M:%S %a %b %_d %Y" "date" 10
                     , Run Com "$HOME/.xmonad/bin/volume.sh" ["-p","3"] "volume" 10
                     , Run Com "$HOME/.xmonad/bin/unread.sh" ["-p","2"] "unread" 100
                     , Run StdinReader
