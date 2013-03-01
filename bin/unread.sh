@@ -22,9 +22,9 @@ p() {
     n=$1
     c=$2
     if [ -z "$c" ]; then
-        printf "%0${padding}d" $n
+        printf "%${padding}d" $n
     else
-        printf "<fc=$c>%0${padding}d</fc>" $n
+        printf "<fc=$c>%${padding}d</fc>" $n
     fi
 }
 
