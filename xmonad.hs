@@ -17,6 +17,7 @@
 
 import Data.Monoid
 import Data.Tuple
+import Data.Ratio ((%))
 import qualified Data.Map        as M
 import System.Exit
 import System.IO
@@ -36,6 +37,8 @@ import XMonad.Layout.ResizableTile
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Tabbed
+import XMonad.Layout.Grid
+import XMonad.Layout.IM
 import XMonad.Actions.TopicSpace
 import XMonad.Prompt
 import XMonad.Prompt.Workspace
@@ -309,7 +312,7 @@ regularLayouts = avoidStruts $ tiled ||| Full
     delta   = 3/100
 
 singletonLayout = avoidStruts $ noBorders $ simpleTabbed ||| Full
-talkLayout      = avoidStruts $ noBorders $ simpleTabbed
+talkLayout      = avoidStruts $ withIM (1%7) (Role "buddy_list") Grid ||| Full
 
 ------------------------------------------------------------------------
 -- Window rules:
