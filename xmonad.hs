@@ -50,6 +50,7 @@ myBrowser  = scriptBin ++ "browser.sh"
 myTerminal = "gnome-terminal" --probably must name this myTerminal
 myEmail    = "thunderbird"
 myCalendar = scriptBin ++ "calendar.sh"
+myTasks    = scriptBin ++ "tasks.sh"
 javaOracle = "export PATH=/usr/lib/jvm/java-7-oracle/jre/bin/java/:$PATH;"
 javaOpen   = "export PATH=/usr/lib/jvm/java-7-openjdk-amd64/bin/:$PATH;"
 pyCharm    = javaOracle ++ "~/pycharm-2.6.3/bin/pycharm.sh"
@@ -103,6 +104,7 @@ topics =
   , TI "talk"           xK_t   $ spawnHere "pidgin"
   , TI "email"          xK_e   $ spawnHere myEmail
   , TI "calendar"       xK_c   $ spawnHere myCalendar
+  , TI "tasks"          xK_q   $ spawnHere myTasks
   , TI "journal"        xK_j   $ spawnHere "gedit ~/journal/`date +'%y-%m-%d'`"
   , TI "internet"       xK_i   $ spawnHere myBrowser
   , TI "gaming"         xK_g   $ return () -- TODO bring up game list somehow
@@ -242,6 +244,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. altMaskRight, xK_Return), spawn "xmonad --recompile; xmonad --restart")
     -- Lock screen
     , ((modm,                  xK_Escape), spawn "gnome-screensaver-command -l")
+
+    -- Machine
+    -- Shutdown
+    , ((modm .|. altMaskLeft,  xK_Escape), spawn "sudo shutdown -h now")
+    , ((modm .|. altMaskRight, xK_Escape), spawn "sudo shutdown -h now")
+    -- Restart
+    , ((modm .|. controlMask,  xK_Escape), spawn "sudo shutdown -r now")
 
     ]
     ++
