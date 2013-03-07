@@ -32,6 +32,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.PerWorkspace
@@ -247,10 +248,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Machine
     -- Shutdown
-    , ((modm .|. altMaskLeft,  xK_Escape), spawn "sudo shutdown -h now")
-    , ((modm .|. altMaskRight, xK_Escape), spawn "sudo shutdown -h now")
+    --, ((modm .|. altMaskLeft,  xK_Escape), spawn "gksu shutdown -h now")
+    --, ((modm .|. altMaskRight, xK_Escape), spawn "gksu shutdown -h now")
     -- Restart
-    , ((modm .|. controlMask,  xK_Escape), spawn "sudo shutdown -r now")
+    --, ((modm .|. controlMask,  xK_Escape), spawn "sudo shutdown -r now")
 
     ]
     ++
@@ -386,9 +387,9 @@ myStartupHook =
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-    xmproc <- spawnPipe "xmobar"
     checkTopicConfig myTopics myTopicConfig
-    xmonad $ defaultConfig {
+    xmproc <- spawnPipe "xmobar"
+    xmonad $ ewmh $ withUrgencyHook NoUrgencyHook $ defaultConfig {
         -- simple stuff
           terminal           = myTerminal
         , focusFollowsMouse  = myFocusFollowsMouse
