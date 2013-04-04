@@ -128,6 +128,7 @@ topics =
   , TI "misc10"         xK_F10 $ return ()
   , TI "misc11"         xK_F11 $ return ()
   , TI "misc12"         xK_F12 $ return ()
+  , TI "spare0"         xK_0   $ return ()
   -- Put hot-added workspaces after here. Organize later.
   ]
 
