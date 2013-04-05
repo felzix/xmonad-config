@@ -1,9 +1,8 @@
 #!/bin/bash
 
-#export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
-#export JDK_HOME=/usr/lib/jvm/java-7-openjdk-amd64
-#export JAVA_HOME=/usr/lib/jvm/java-7-oracle
-#export JDK_HOME=/usr/lib/jvm/java-7-oracle
+# PyCharm doesn't work with java 7 of neither openjdk nor oracle
+# So I use java 6 openjdk since I have it.
+
 export JAVA_HOME=/usr/lib/jvm/java-6-oracle
 export JDK_HOME=/usr/lib/jvm/java-6-oracle
 export PYCHARM_HOME=/home/felzix/bin/pycharm
