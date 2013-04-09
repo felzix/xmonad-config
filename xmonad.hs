@@ -308,7 +308,7 @@ myLayout = onWorkspaces singletonWorkspaces singletonLayout
          $ onWorkspaces talkWorkspaces talkLayout
          $ regularLayouts
 
-regularLayouts = avoidStruts $ tiled ||| Full
+regularLayouts = avoidStruts $ tiled ||| Full ||| Grid
   where
     -- default tiling algorithm partitions the screen into two panes
     tiled   = ResizableTall nmaster delta ratio []
