@@ -308,20 +308,7 @@ myLayout = onWorkspaces singletonWorkspaces singletonLayout
          $ onWorkspaces talkWorkspaces talkLayout
          $ regularLayouts
 
-regularLayouts = avoidStruts $ tiled ||| Full ||| Grid
-  where
-    -- default tiling algorithm partitions the screen into two panes
-    tiled   = ResizableTall nmaster delta ratio []
-
-    -- The default number of windows in the master pane
-    nmaster = 1
-
-    -- Default proportion of screen occupied by master pane
-    ratio   = 1/2
-
-    -- Percent of screen to increment by when resizing panes
-    delta   = 3/100
-
+regularLayouts = avoidStruts $ Grid ||| Full
 singletonLayout = avoidStruts $ noBorders $ simpleTabbed ||| Full
 talkLayout      = avoidStruts $ withIM (1%7) (Role "buddy_list") Grid ||| Full
 
