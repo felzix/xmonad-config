@@ -48,7 +48,7 @@ host = fmap nodeName getSystemID
 
 scriptBin  = "~/.xmonad/bin/"
 myBrowser  = scriptBin ++ "browser.sh"
-myTerminal = "gnome-terminal" --probably must name this myTerminal
+myTerminal = "terminator" --probably must name this myTerminal
 myEmail    = "thunderbird"
 myCalendar = scriptBin ++ "calendar.sh"
 myTasks    = scriptBin ++ "tasks.sh"

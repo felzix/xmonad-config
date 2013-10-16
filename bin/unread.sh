@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# XXX cutting this off
+echo disabled
+exit 0
+
 padding=0
 if [ "x$1" == "x-p" -a ! -z "$2" ]; then
     padding=$2
