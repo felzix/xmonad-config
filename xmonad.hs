@@ -117,7 +117,7 @@ topics =
   , TI "eclipse2"       xK_2   $ spawnHere eclipse
   , TI "pycharm4"       xK_4   $ spawnHere pyCharm
   , TI "leksah6"        xK_6   $ spawnHere leksah
-  , TI "misc2"          xK_F2  $ return ()
+  , TI "terminator"     xK_F2  $ return ()
   , TI "misc3"          xK_F3  $ return ()
   , TI "misc4"          xK_F4  $ return ()
   , TI "misc5"          xK_F5  $ return ()
